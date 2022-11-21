@@ -84,6 +84,36 @@ namespace Exercise_3
                 Console.WriteLine("4. Exit");
                 Console.Write("\nEnter your Choice (1-4): ");
                 char ch = Convert.ToChar(Console.ReadLine());
+                switch (ch)
+                {
+                    case '1':
+                        {
+                            obj.traverse();
+                        }
+                        break;
+                    case '2':
+                        {
+                            if(obj.listEmpty() == true)
+                            {
+                                Console.WriteLine("\nList is empty");
+                                break;
+                            }
+                            Node prev, curr;
+                            prev = curr = null;
+                            Console.Write("\nEnter the roll number of the students whose records is to be searched: ");
+                            int num = Convert.ToInt32(Console.ReadLine());
+                            if (obj.Search(num, ref prev, ref curr) == false)
+                                Console.WriteLine("\nRecord not found");
+                            else
+                            {
+                                Console.WriteLine("\nRecord found");
+                                Console.WriteLine("\nRoll number: " +
+                                    curr.rollNumber);
+                                Console.WriteLine("\nName : " + curr.name);
+                            }
+                        }
+                        break ;
+                }
             }
         }
     }

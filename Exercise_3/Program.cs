@@ -21,6 +21,46 @@ namespace Exercise_3
         {
             LAST = null;
         }
+        public void addNote()
+        {
+            int rollNo;
+            string nm;
+            Console.Write("\nEnter the roll number of the student: ");
+            rollNo = Convert.ToInt32(Console.ReadLine());
+            Console.Write("\nEnter the roll name of the student: ");
+            nm = Console.ReadLine();
+            Node newnode = new Node();
+            newnode.rollNumber = rollNo;
+            newnode.name = nm;
+            //if the node to be inserted is the first node
+            if (LAST == null || (rollNo <= LAST.rollNumber))
+            {
+                if ((LAST != null) && (rollNo == LAST.rollNumber))
+                {
+                    Console.WriteLine("\nDuplicate roll numbers not allowed\n");
+                    return;
+                }
+                newnode.next = LAST;
+                LAST = newnode;
+                return;
+            }
+            Node previous, current;
+            previous = LAST;
+            current = LAST;
+
+            while ((current != null) && (rollNo >= current.rollNumber))
+            {
+                if (rollNo == current.rollNumber)
+                {
+                    Console.WriteLine("\nDuplicate roll numbers not alowed\n");
+                    return;
+                }
+                previous = current;
+                current = current.next;
+            }
+            newnode.next = current;
+            previous.next = newnode;
+        }
   
         public bool Search(int rollNo, ref Node previous, ref Node current)
         /*Searches for the specified node*/
@@ -122,6 +162,9 @@ namespace Exercise_3
                             }
                             break;
                         case '4':
+                            {
+                                obj.addNote();
+                            }
                             return;
                         default:
                             {
